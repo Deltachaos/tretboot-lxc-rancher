@@ -97,7 +97,6 @@ if pct status $id || qm status $id; then
    exit 1
 fi
 
-configmap_rancher=""
 if [ "${configmap_rancher}" ]; then
   configmap_rancher="$(sed 's/^/    /' <<EOF
 $configmap_rancher
