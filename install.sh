@@ -97,6 +97,14 @@ if pct status $id || qm status $id; then
    exit 1
 fi
 
+configmap_rancher=""
+if [ "${configmap_rancher}" ]; then
+  configmap_rancher="$(sed 's/^/    /' <<EOF
+$configmap_rancher
+EOF
+)"
+fi
+
 configmap_proxmox_api=""
 if [ "${proxmox_api}" == "1" ]; then
   configmap_proxmox_api="$(cat - <<EOF
@@ -222,6 +230,7 @@ data:
   path: "tretboot"
   rancher.yaml: |
     hostname: $hostname
+$configmap_rancher
   tretboot-fleet.yaml: |
     repository:
       url: "$repository"
