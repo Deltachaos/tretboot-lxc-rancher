@@ -1,6 +1,0 @@
-defaultNamespace: metacrtl
-
-helm:
-  chart: oci://ghcr.io/metacontroller/metacontroller-helm
-  version: v2.2.5
-
