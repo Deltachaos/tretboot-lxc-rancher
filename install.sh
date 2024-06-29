@@ -6,6 +6,9 @@ default_hostname=rancher.$(hostname -d)
 default_id=$(pvesh get /cluster/nextid)
 default_bridge=$(brctl show | awk 'NR>1 {print $1}' | grep vmbr | head -n1)
 
+cores=${cores:-4}
+memory=${memory:-8192}
+swap=${swap:-4096}
 firewall=${firewall:-1}
 
 if [ -z "${bridge}" ]; then
@@ -165,7 +168,7 @@ EOF
 fi
 
 
-pct create $id $storage:vztmpl/$image --cores 2 --memory 4096 --swap 2048 --rootfs ${storage}:${size} --hostname=$hostname --onboot 1
+pct create $id $storage:vztmpl/$image --cores $cores --memory $memory --swap $swap --rootfs ${storage}:${size} --hostname=$hostname --onboot 1
 (cat <<EOF
 lxc.apparmor.profile: unconfined
 lxc.cgroup2.devices.allow: a
